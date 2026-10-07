@@ -1,8 +1,8 @@
 # MusicUID · Yunzai V3
 
-本仓库在原版 GsCore 点歌插件基础上增加了可直接安装到 Yunzai V3 的移植版，支持网易云音乐、QQ 音乐和酷狗音乐的搜索、点播、歌词、登录凭据管理与分享链接解析，并提供 Guoba-Plugin 配置面板和图片卡片。
+本仓库是 [MusicUID 原项目](https://github.com/Xbaiyz12/MusicUID) 的 Yunzai V3 移植版，支持网易云音乐、QQ 音乐和酷狗音乐的搜索、点播、歌词、登录凭据管理与分享链接解析，并提供 Guoba-Plugin 配置面板和图片卡片。
 
-上游项目：[Xbaiyz12/MusicUID](https://github.com/Xbaiyz12/MusicUID)。原版 GsCore 使用说明保存在 [README-GsCore.md](./README-GsCore.md)；本仓库保留 MIT 许可，见 [LICENSE](./LICENSE)。
+本移植版保留原项目 MIT 许可，见 [LICENSE](./LICENSE)。
 
 ## 功能
 
