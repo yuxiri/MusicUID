@@ -90,7 +90,7 @@ pnpm install --prod
 
 ## Guoba 配置面板
 
-安装并启动 [Guoba-Plugin](https://gitee.com/guoba-yunzai/guoba-plugin)，重启 Yunzai 后可在 MusicUID 插件配置页调整默认平台、搜索数量、凭据、自建音源、图片清晰度、语音/文件发送开关和登录白名单。配置保存后立即生效。未安装 Guoba-Plugin 不影响指令功能，也可编辑配置文件后重载插件。
+安装并启动 [Guoba-Plugin Next](https://gitee.com/longhengmu/guoba-plugin-next)，重启 Yunzai 后可在 MusicUID 插件配置页调整默认平台、搜索数量、凭据、自建音源、图片清晰度、语音/文件发送开关和登录白名单。配置保存后立即生效。未安装 Guoba-Plugin 不影响指令功能，也可编辑配置文件后重载插件。
 
 ## 配置文件
 
