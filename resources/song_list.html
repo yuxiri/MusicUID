@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @font-face{font-family:"MiSans";src:url("{{miSansFont}}") format("truetype");font-style:normal;font-weight:100 900;font-display:swap}*{box-sizing:border-box}body{zoom:{{renderScale}};width:656px;margin:0;padding:18px;background:#f4f5f8;font-family:"MiSans","Microsoft YaHei","PingFang SC",sans-serif;color:#252637}
+    .card{width:620px;border-radius:25px;overflow:hidden;background:#fff;box-shadow:0 16px 45px #27264a20}
+    .hero{padding:26px 30px;color:#fff;background:linear-gradient(135deg,#7769d9,#4b40a8)}
+    .theme-netease .hero{background:linear-gradient(135deg,#f06460,#cf303b)}.theme-qq .hero{background:linear-gradient(135deg,#46d491,#15985b)}.theme-kugou .hero{background:linear-gradient(135deg,#5bbaf7,#237fc5)}
+    .eyebrow{font-size:12px;letter-spacing:2px;opacity:.85;font-weight:700}.title{font-size:27px;font-weight:800;margin-top:8px;max-width:470px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.subtitle{font-size:14px;margin-top:7px;opacity:.9}.count{float:right;border:1px solid #ffffff66;background:#ffffff22;border-radius:18px;padding:7px 13px;font-size:12px;font-weight:bold}
+    .content{padding:21px 23px 17px}.group{margin-bottom:17px}.group-title{font-size:14px;font-weight:800;margin:0 3px 9px;color:#6b5bd2}.p-netease .group-title{color:#dc4444}.p-qq .group-title{color:#15985b}.p-kugou .group-title{color:#237fc5}
+    .row{height:69px;display:flex;align-items:center;padding:9px 12px;margin-bottom:7px;border:1px solid #ececf1;border-radius:14px;background:#fdfdff;gap:12px;position:relative}.row:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:#8174dc}.p-netease .row:before{background:#e34a4a}.p-qq .row:before{background:#2dbb78}.p-kugou .row:before{background:#2995e2}
+    .idx{width:25px;text-align:center;font-size:16px;font-weight:800;color:#777}.cover{width:49px;height:49px;border-radius:10px;object-fit:cover;background:#eee}.cover-ph{width:49px;height:49px;border-radius:10px;background:#efedf9;display:grid;place-items:center;color:#7467d4;font-size:22px}.meta{min-width:0;flex:1}.name{font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.singer{font-size:11px;color:#858594;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.right{text-align:right;min-width:53px}.duration{font-size:11px;color:#777;font-family:monospace}.tag{font-size:10px;color:#25985d;background:#e8f8ef;border-radius:10px;padding:3px 7px;margin-top:4px;display:inline-block}.paid{color:#bf8424;background:#fff4df}.empty{padding:14px;color:#888;background:#fafafd;border-radius:12px;font-size:12px}.tip{padding:12px 14px;border-radius:13px;background:#f0effb;color:#6e6c81;font-size:12px;line-height:1.6}.footer{font-size:10px;color:#999;margin-top:12px;display:flex;justify-content:center;text-align:center}
+  </style>
+</head>
+<body>
+  <div class="card theme-{{theme}}">
+    <div class="hero"><span class="count">{{total}} 首</span><div class="eyebrow">{{eyebrow}}</div><div class="title">{{keyword}}</div><div class="subtitle">{{subtitle}}</div></div>
+    <div class="content">
+      {{each groups group}}
+      <section class="group p-{{group.platform}}">
+        <div class="group-title">● {{group.platform_name}}　{{group.songs.length}} 首</div>
+        {{if group.songs.length}}
+          {{each group.songs song}}
+          <div class="row">
+            <div class="idx">{{song.index}}</div>
+            {{if song.cover}}<img class="cover" src="{{song.cover}}" referrerpolicy="no-referrer">{{else}}<div class="cover-ph">♫</div>{{/if}}
+            <div class="meta"><div class="name">{{song.songName}}</div><div class="singer">{{song.singerName}}{{if song.albumName}} · {{song.albumName}}{{/if}}</div></div>
+            <div class="right"><div class="duration">{{song.duration}}</div><span class="tag{{if song.payplay}} paid{{/if}}">{{if song.payplay}}VIP{{else}}免费{{/if}}</span></div>
+          </div>
+          {{/each}}
+        {{else}}<div class="empty">{{group.empty_text}}</div>{{/if}}
+      </section>
+      {{/each}}
+      <div class="tip">{{tip}}</div><div class="footer"><span>Created By {{coreInfo}} &amp; MusicUID</span></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @font-face{font-family:"MiSans";src:url("{{miSansFont}}") format("truetype");font-style:normal;font-weight:100 900;font-display:swap}*{box-sizing:border-box}body{zoom:{{renderScale}};width:656px;margin:0;padding:18px;background:#f4f5f8;font-family:"MiSans","Microsoft YaHei","PingFang SC",sans-serif;color:#252637}.card{width:620px;border-radius:25px;overflow:hidden;background:#fff;box-shadow:0 16px 45px #27264a20}.hero{padding:25px 30px;color:#fff;background:linear-gradient(135deg,#7769d9,#4b40a8)}.eyebrow{font-size:12px;letter-spacing:2px;opacity:.85;font-weight:700}.title{font-size:25px;font-weight:800;margin-top:8px}.subtitle{font-size:13px;margin-top:7px;opacity:.9}.content{padding:19px 23px 17px}.section{margin-bottom:15px}.section-title{font-size:13px;font-weight:800;color:#6256c8;margin:0 3px 8px}.capabilities{display:grid;grid-template-columns:1fr 1fr;gap:7px}.capability{min-height:53px;border:1px solid #ececf1;border-radius:12px;padding:8px 11px;background:#fdfdff}.capability-label{font-size:10px;color:#8a8997}.capability-value{font-size:11px;font-weight:700;margin-top:3px;color:#343443;line-height:1.35}.capability.warn{border-color:#f3dfbd;background:#fffaf0}.capability.warn .capability-value{color:#a66b17}.capability.info{background:#f8f7fd}.rows{display:grid;gap:6px}.row{display:flex;align-items:center;gap:9px;min-height:39px;padding:7px 10px;border:1px solid #ececf1;border-radius:11px;background:#fdfdff}.mark{width:19px;height:19px;flex:none;border-radius:50%;display:grid;place-items:center;background:#e9f8ef;color:#258a4d;font-size:11px;font-weight:800}.mark.off{background:#f0f0f3;color:#999}.mark.warn{background:#fff1d8;color:#b37920}.row-name{font-size:11px;font-weight:800;width:102px;flex:none}.row-value{font-size:10px;color:#777;flex:1;min-width:0}.pill{font-size:9px;font-weight:700;padding:4px 7px;border-radius:10px;background:#e9f8ef;color:#258a4d;white-space:nowrap}.pill.off{background:#f0f0f3;color:#999}.pill.warn{background:#fff1d8;color:#b37920}.api-row .row-name{width:112px}.cache{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:11px;background:#f0effb;color:#6256c8;font-size:11px;font-weight:700}.tip{margin-top:10px;padding:10px 12px;border-radius:11px;background:#f8f8fa;color:#81808d;font-size:10px;line-height:1.55}.footer{display:flex;justify-content:center;text-align:center;color:#999;font-size:10px;margin-top:12px}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header class="hero">
+      <div class="eyebrow">MUSICUID · SYSTEM CHECK</div>
+      <div class="title">点歌运行诊断</div>
+      <div class="subtitle">当前适配器：{{adapter}} · 运行环境与搜索接口检查</div>
+    </header>
+    <main class="content">
+      <section class="section">
+        <div class="section-title">发送能力</div>
+        <div class="capabilities">
+          {{each capabilities item}}
+          <div class="capability {{item.state}}"><div class="capability-label">{{item.label}}</div><div class="capability-value">{{item.value}}</div></div>
+          {{/each}}
+        </div>
+      </section>
+      <section class="section">
+        <div class="section-title">凭据配置</div>
+        <div class="rows">
+          {{each credentials item}}
+          <div class="row"><span class="mark {{item.state}}">{{item.mark}}</span><span class="row-name">{{item.name}}</span><span class="row-value">{{item.value}}</span><span class="pill {{item.state}}">{{item.stateLabel}}</span></div>
+          {{/each}}
+        </div>
+      </section>
+      <section class="section">
+        <div class="section-title">搜索接口连通性</div>
+        <div class="rows">
+          {{each apiResults item}}
+          <div class="row api-row"><span class="mark {{item.state}}">{{item.mark}}</span><span class="row-name">{{item.name}}</span><span class="row-value">{{item.stateLabel}}</span><span class="pill {{item.state}}">{{item.value}}</span></div>
+          {{/each}}
+        </div>
+      </section>
+      <div class="cache"><span>内存缓存</span><span>{{cacheSummary}}</span></div>
+      <div class="tip">💡 诊断不会读取或显示 Cookie。接口探测只检查搜索服务连通性，不代表具体歌曲可以播放，也不验证会员权益。</div>
+      <div class="footer"><span>Created By {{coreInfo}} &amp; MusicUID</span></div>
+    </main>
+  </div>
+</body>
+</html>

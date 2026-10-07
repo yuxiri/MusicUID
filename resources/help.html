@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @font-face{font-family:"MiSans";src:url("{{miSansFont}}") format("truetype");font-style:normal;font-weight:100 900;font-display:swap}*{box-sizing:border-box}body{zoom:{{renderScale}};width:656px;margin:0;padding:18px;background:#f4f5f8;font-family:"MiSans","Microsoft YaHei","PingFang SC",sans-serif;color:#252637}.card{width:620px;border-radius:25px;overflow:hidden;background:#fff;box-shadow:0 16px 45px #27264a20}.hero{padding:25px 30px;color:white;background:linear-gradient(135deg,#7769d9,#4b40a8)}.eyebrow{font-size:12px;letter-spacing:2px;opacity:.85;font-weight:700}.title{font-size:25px;font-weight:800;margin-top:8px}.subtitle{font-size:13px;margin-top:7px;opacity:.9}.content{padding:20px 23px}.section{margin-bottom:17px}.section-title{font-size:14px;font-weight:800;color:#6b5bd2;margin:0 0 8px 4px}.login .section-title{color:#d96b27}.link .section-title{color:#25985d}.item{display:flex;align-items:center;gap:12px;border:1px solid #ececf1;border-radius:13px;padding:10px 12px;margin-bottom:7px;position:relative}.item:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:#8072da}.login .item:before{background:#e8813d}.link .item:before{background:#31b777}.cmd{font-family:"MiSans",monospace;font-weight:800;font-size:12px;background:#f2f1f7;border-radius:7px;padding:5px 7px;white-space:nowrap}.desc{font-size:11px;color:#737380;flex:1}.tag{font-size:9px;color:#6d61c8;background:#f0effb;border-radius:10px;padding:4px 7px;white-space:nowrap}.tip{background:#f0effb;border-radius:12px;padding:12px 14px;font-size:11px;line-height:1.6;color:#6c6980}.footer{display:flex;justify-content:center;text-align:center;color:#999;font-size:10px;margin-top:13px}
+  </style>
+</head>
+<body><div class="card"><header class="hero"><div class="eyebrow">MUSICUID · HELP MANUAL</div><div class="title">点歌插件使用指南</div><div class="subtitle">支持网易云音乐、QQ音乐、酷狗音乐多平台搜播与扫码登录</div></header><main class="content">
+  {{each sections section}}
+  <section class="section {{section.type}}"><div class="section-title">● {{section.title}}</div>{{each section.commands item}}<div class="item"><span class="cmd">{{item.cmd}}</span><span class="desc">{{item.desc}}</span>{{if item.tag}}<span class="tag">{{item.tag}}</span>{{/if}}</div>{{/each}}</section>
+  {{/each}}
+  <div class="tip">💡 所有点歌指令无需特殊前缀。在 Guoba-Plugin 锅巴插件配置页，可调整图片清晰度倍率与格式，以及默认平台、搜索条数、音频投递和登录白名单。</div><div class="footer"><span>Created By {{coreInfo}} &amp; MusicUID</span></div>
+</main></div></body>
+</html>

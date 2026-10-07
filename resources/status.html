@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @font-face{font-family:"MiSans";src:url("{{miSansFont}}") format("truetype");font-style:normal;font-weight:100 900;font-display:swap}*{box-sizing:border-box}body{zoom:{{renderScale}};width:656px;margin:0;padding:18px;background:#f4f5f8;font-family:"MiSans","Microsoft YaHei","PingFang SC",sans-serif;color:#252637}.card{width:620px;border-radius:25px;overflow:hidden;background:#fff;box-shadow:0 16px 45px #27264a20}.hero{padding:26px 30px;color:white;background:linear-gradient(135deg,#7769d9,#4b40a8)}.eyebrow{font-size:12px;letter-spacing:2px;opacity:.85;font-weight:700}.title{font-size:25px;font-weight:800;margin-top:8px}.subtitle{font-size:13px;margin-top:7px;opacity:.9}.content{padding:20px 23px}.platform{display:flex;align-items:center;gap:13px;border:1px solid #ececf1;border-radius:15px;padding:13px;margin-bottom:9px;position:relative}.platform:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:#8072da}.p-netease:before{background:#e34a4a}.p-qq:before{background:#2dbb78}.p-kugou:before{background:#2995e2}.p-custom:before{background:#8072da}.icon{width:40px;height:40px;border-radius:12px;background:#f2f0fc;display:grid;place-items:center;font-size:20px;flex:none}.p-netease .icon{background:#fff0ef}.p-qq .icon{background:#eaf9f1}.p-kugou .icon{background:#edf6ff}.p-custom .icon{background:#f2f0fc}.icon img{width:34px;height:34px;border-radius:9px;display:block;object-fit:cover;box-shadow:0 1px 4px #10182822}.main{flex:1;min-width:0}.name{font-size:14px;font-weight:800}.value{font-size:11px;margin-top:4px;color:#666;overflow-wrap:anywhere}.note{font-size:10px;color:#999;margin-top:4px}.state{font-size:10px;font-weight:bold;white-space:nowrap;border-radius:12px;padding:5px 9px;background:#edf8f0;color:#268d4f}.s-warn{background:#fff4df;color:#ba8128}.s-off{background:#f0f0f3;color:#999}.tip{background:#f0effb;border-radius:12px;padding:12px 14px;font-size:11px;line-height:1.6;color:#6c6980}.tip div{margin-top:3px}.footer{display:flex;justify-content:center;text-align:center;color:#999;font-size:10px;margin-top:13px}
+  </style>
+</head>
+<body><div class="card"><header class="hero"><div class="eyebrow">MUSICUID · CREDENTIAL STATUS</div><div class="title">音乐平台凭据与音源状态</div><div class="subtitle">{{summary}}</div></header><main class="content">
+  {{each platforms platform}}
+  <div class="platform p-{{platform.key}}"><div class="icon">{{if platform.icon_url}}<img src="{{platform.icon_url}}" alt="{{platform.name}}">{{else}}{{platform.icon}}{{/if}}</div><div class="main"><div class="name">{{platform.name}}</div><div class="value">{{platform.value}}</div><div class="note">{{platform.note}}</div></div><span class="state s-{{platform.state}}">{{platform.state_text}}</span></div>
+  {{/each}}
+  <div class="tip"><b>💡 登录与配置</b>{{each tips row}}<div><b>{{row.label}}</b>：{{row.text}}</div>{{/each}}</div><div class="footer"><span>Created By {{coreInfo}} &amp; MusicUID</span></div>
+</main></div></body>
+</html>

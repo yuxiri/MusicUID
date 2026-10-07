@@ -1,0 +1,10 @@
+{
+  "name": "musicuid-yunzai",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Multi-platform music search and playback plugin for Yunzai",
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  }
+}
