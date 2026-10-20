@@ -1518,6 +1518,28 @@ function rememberCover(url, value, ttl) {
   while (coverCache.size > COVER_CACHE_MAX) coverCache.delete(coverCache.keys().next().value)
 }
 
+async function readCoverBytes(response) {
+  const limit = 2 * 1024 * 1024
+  if (Number(response.headers.get('content-length')) > limit) throw new Error('封面超过 2 MB')
+  const reader = response.body?.getReader()
+  if (!reader) throw new Error('封面响应为空')
+  const chunks = []
+  let length = 0
+  try {
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+      length += value.byteLength
+      if (length > limit) throw new Error('封面超过 2 MB')
+      chunks.push(Buffer.from(value))
+    }
+    return Buffer.concat(chunks, length)
+  } finally {
+    await reader.cancel().catch(() => {})
+    reader.releaseLock()
+  }
+}
+
 async function getCoverDataUrl(url) {
   const cached = coverCache.get(url)
   if (cached) {
@@ -1532,20 +1554,21 @@ async function getCoverDataUrl(url) {
   if (pending) return pending
 
   const request = (async () => {
+    let response
     try {
-      const response = await fetch(url, {
+      response = await fetch(url, {
         headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Safari/537.36' },
         signal: AbortSignal.timeout(4000),
       })
       if (!response.ok) throw new Error(`HTTP ${response.status}`)
       const mime = (response.headers.get('content-type') || 'image/jpeg').split(';')[0]
       if (!mime.startsWith('image/')) throw new Error('响应不是图片')
-      const bytes = Buffer.from(await response.arrayBuffer())
-      if (bytes.length > 2 * 1024 * 1024) throw new Error('封面超过 2 MB')
+      const bytes = await readCoverBytes(response)
       const value = `data:${mime};base64,${bytes.toString('base64')}`
       if (bytes.length <= COVER_CACHE_MAX_BYTES) rememberCover(url, value, COVER_CACHE_TTL)
       return value
     } catch {
+      if (response?.body && !response.body.locked) await response.body.cancel().catch(() => {})
       rememberCover(url, '', COVER_CACHE_NEGATIVE_TTL)
       return ''
     }
